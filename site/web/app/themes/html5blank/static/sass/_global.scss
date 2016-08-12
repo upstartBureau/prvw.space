@@ -1,0 +1,456 @@
+@import '__variables';
+@import '__mixins';
+@import '__reset';
+@import '__fonts';
+
+html, body {
+  height:100%;
+  min-height:100%;
+  max-height: 100%;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
+body {
+  @include flexbox;
+  @include flex-direction(column);
+  font-size: 16px;
+  line-height: normal;
+  font-family: 'Montserrat-Light', 'OpenSans-Light', sans-serif;
+  color: $darkish-blue;
+  background-color: white;
+
+  &#brands {
+    font-family: 'Montserrat-Light', 'OpenSans-Light', sans-serif;
+    text-rendering: optimizeLegibility;
+  }
+  &#retailers {
+    font-family: 'Montserrat-Light', 'OpenSans-Light', sans-serif;
+    text-rendering: optimizeLegibility;
+  }
+  * {
+    font-family: 'Montserrat-Light', 'OpenSans-Light', sans-serif;
+    // outline: 1px solid cyan;
+    box-sizing: border-box;
+  }
+}
+h1 {
+  font-size: 2.25rem;
+  font-family: 'Montserrat-Regular', 'OpenSans-Regular', sans-serif;
+  letter-spacing: 0.8px;
+}
+h2 {
+  font-size: 2.25rem;
+  font-family: 'Montserrat-Regular', 'OpenSans-Regular', sans-serif;
+  letter-spacing: 0.8px;
+}
+h3 {
+  font-size: 1.25rem;
+  font-family: 'Montserrat-Regular', 'OpenSans-Regular', sans-serif;
+  color: $darkish-blue;
+  padding-top: 0.6rem;
+  letter-spacing: 0.8px;
+}
+h4 {
+  font-size: 1.5rem;
+  font-family: 'Montserrat-Regular', 'OpenSans-Regular', sans-serif;
+  font-weight: bold;
+}
+li, p, span, a {
+  font-size: 18px;
+  color:$darkish-blue;
+  text-decoration: none;
+}
+.gray {
+  color: $slate;
+  line-height: 1.7;
+  font-size: 1.25rem
+}
+.white {
+  line-height: 1.9;
+  font-size: 1.2rem;
+  padding-top: 0.9rem;
+}
+.blue {
+  line-height: 1.7;
+  font-size: 1.25rem;
+}
+.content-wrapper {
+  position: relative;
+  top:140px;
+  left:0;
+  @media only screen and (max-width: 785px) {
+    top:144px;
+  }
+  @media only screen and (max-width: 600px) {
+    top: 87px;
+  }
+}
+.brands-wrapper {
+  width: 535px;
+  max-width: 100%;
+}
+.quote-wrapper {
+  width: 760px;
+  max-width: 100%;
+  margin:auto;
+}
+.future-wrapper {
+  width: 679px;
+  max-width: 100%;
+  padding-top: 0.75rem;
+}
+.future-wrapper p {
+  max-width: 100%;
+  padding: 3rem 0 0 0;
+}
+.ghost *{
+  color: white;
+}
+main.container {
+  @include flex(defualt);
+}
+section.content {
+  width: 100%;
+  padding-top: 2.4rem;
+}
+section.content.logo-carousel {
+  padding-bottom: 19em;
+  @media only screen and (max-width: 768px) {
+    padding-bottom: 17rem;
+  }
+  @media only screen and (max-width: 768px) {
+    padding-bottom: 0;
+  }
+}
+.carousel-heading {
+  font-size: 2.25rem;
+  font-family: 'Montserrat-Light', 'OpenSans-Light', sans-serif;
+  letter-spacing: 0.8px;
+}
+.row {
+  // width: 1440px;
+  // max-width: 100%;
+  width: 100%;
+  margin: auto;
+  padding: 0 17.5vw;
+}
+.col {
+  max-width: 100%;
+  padding-top: 1.8rem;
+}
+.bg-image {
+  background-size: cover;
+  background-position: right center;
+}
+.brands {
+  min-height: 473px;
+  background-image: url('../img/brands/header-bg.png');
+}
+.future-proof {
+  min-height: 486px;
+  background-image: url('../img/brands/section-bg-2.png');
+}
+.retailers{
+  min-height: 473px;
+  background-image: url('../img/retailers/header-bg.png');
+}
+section.content.on-demand {
+  // width: 1440px;
+  // max-width: 100%;
+  width: 100%;
+  background: #f7f7f7;
+  padding-top: 0px;
+  @media only screen and (max-width: 768px){
+    width: 768px;
+    max-width: 100%;
+    // height: 620px;
+    height:690px;
+  }
+}
+.button {
+  @include button($slime-green, white)
+  //text-shadow: 1px 1px rgba(0,0,0,0.15), 0 0 10px rgba(0,0,0,0.25);
+  padding: 14px 29px;
+  display: inline-block;
+  margin: 2rem 0 3rem 0;
+  line-height: 1;
+}
+.brand-activation, .facts, .shopping-experience {
+  text-align: center;
+}
+.grid, .grid-row {
+  @include inline-flex;
+  @include flex-flow(row wrap);
+  @include justify-content(space-around);
+  padding-bottom: 0.8rem;
+}
+.fact img {
+  width: 191px;
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+  padding: 0 0.25rem;
+}
+.fact p {
+  max-width: 75%;
+  margin: auto;
+  line-height: 1.55;
+  font-size: 1.5rem;
+}
+.item, .fact {
+  @include flex(default);
+  padding: 1.5rem 0;
+  line-height: 1.9;
+  max-width: 36%;
+}
+.down {
+  padding-top: 2.5rem;
+}
+.item img {
+  width: 190px;
+  height: 140px;
+  margin: 0.9rem 0;
+}
+.cta {
+  padding: 2rem 0;
+}
+.quote {
+  background: rgba(46,46,47,0.25);
+  text-align: center;
+  padding: 2rem 0 1.5rem 0;
+}
+.quote a {
+  color: white;
+}
+.quote span {
+  font-size: 0.75rem;
+  margin: 0;
+}
+.col-lg {
+  max-width: 49%;
+  vertical-align: top;
+  display: inline-block;
+}
+.col-sm img {
+  width: 100%;
+  height: auto;
+}
+.col-sm {
+  max-width: 50%;
+  padding-bottom: 0.95rem;
+  display: inline-block;
+}
+h1.logo-cloud-headline {
+  padding: 1.6rem 0rem;
+    text-align: center;
+    width: 800px;
+    max-width: 100%;
+    margin: auto;
+}
+
+.slider {
+  display: block;
+  margin: 2rem auto;
+  text-align: center;
+  min-height: 456px;
+  position: relative;
+  @media only screen and (max-width: 768px){
+    width: 615px;
+    max-width: 100%;
+    img {
+      width: 100%;
+    }
+  }
+  .slide {
+    position: absolute;
+    max-height: 400px;
+    max-width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    top:30%;
+    transition: all 1000ms ease-out;
+    z-index: 1;
+    opacity:0;
+  }
+  .active {
+    top:20%;
+    opacity: 1;
+    z-index: 2;
+  }
+}
+.cloud-illustration {
+  margin: 1em auto;
+  display: block;
+  background: url(../img/retailers/data-cloud.png) no-repeat;
+  background-size: contain;
+  width: 768px;
+  height: 650px;
+  max-width: 90%;
+  position: relative;
+  top:-3em;
+
+  @media only screen and (max-width: 768px){
+    margin: 1em auto;
+    width: 700px;
+  }
+  @media only screen and (max-width: 600px){
+    height: 650px;
+  }
+}
+.narrow-blurb {
+    width: 550px;
+    max-width: 95%;
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+    top: 23%;
+    @media only screen and (max-width: 600px){
+      top:53%;
+    }
+    text-align: center;
+  }
+  h2.narrow-blurb-heading {
+    padding-bottom: 1rem;
+  }
+  .data-rich_wrapper {
+    width: 622px;
+    max-width: 100%;
+    margin: auto;
+  }
+  .partner_wrapper {
+    width: 765px;
+    max-width: 100%;
+    min-height: 825px;
+    line-height: 1.5;
+    margin: auto;
+  }
+  .shopping-experience img {
+    margin: 2.5rem auto;
+    width: 80%;
+  }
+  .fact {
+    max-width: 25%;
+  }
+@media only screen and (min-width: 1276px) {
+  .hide-big { display: none; }
+}
+//tablet
+@media only screen and (max-width: 768px) {
+  .row {
+    padding: 0 8.3vw;
+  }
+  .brand-activation-tab {
+    padding: 0 1vw;
+  }
+  .col {
+    max-width: 90%;
+  }
+  .col-sm {
+    max-width: 40%;
+    padding-bottom: 0.95rem;
+  }
+  .col-lg {
+    max-width: 59%;
+    vertical-align: top;
+  }
+  .quote {
+    padding: 2rem 1rem 1.5rem 1rem;
+    line-height: 1.5;
+  }
+  .item {
+    max-width: 48%;
+  }
+  .fact {
+    max-width: 20%;
+  }
+  .fact img, .fact p {
+    font-size: 0.8rem;
+    width: 100%;
+    height: auto;
+    margin: auto;
+  }
+  .future-wrapper p {
+    width: 65%;
+    padding: 2em 0 3rem 0;
+  }
+  .bg-image {
+    background-position: -700px 0;
+  }
+  .retailers {
+    background-position: -180px 0;
+  }
+  h1.logo-cloud-headline {
+    padding: 0 0 1rem 0;
+    width: 637px;
+  }
+  .carousel-heading {
+    font-size: 2.25rem;
+    font-family: 'Montserrat-Regular', 'OpenSans', sans-serif;
+    letter-spacing: 0.8px;
+  }
+  .cta {
+    padding: 0;
+  }
+}
+
+//mobile
+@media only screen and (max-width: 600px) {
+  .row {
+    padding: 0 9.1%;
+  }
+  .brand-activation-tab {
+    padding: 0 1vw;
+    width: 600px;
+    max-width: 100%;
+  }
+  .brand-activation-tab h1 {
+    max-width: 60%;
+    margin: auto;
+  }
+  .col {
+    max-width: 90%;
+  }
+  .col-sm {
+    max-width: 40%;
+    padding-bottom: 0.95rem;
+  }
+  .col-lg {
+    max-width: 59%;
+    vertical-align: top;
+  }
+  .quote {
+    padding: 2rem 1rem 1.5rem 1rem;
+    line-height: 1.5;
+  }
+  .item {
+    max-width: 75%;
+  }
+  .grid-row {
+    //@include flex-flow(row nowrap);
+  }
+  .fact {
+    max-width: 40%;
+  }
+  .fact img, .fact p {
+    font-size: 0.8rem;
+    width: 100%;
+  }
+  .future-wrapper {
+    padding: 0;
+  }
+  .future-wrapper p {
+    width: 100%;
+    padding: 2em 0 3rem 0;
+  }
+  .quote-wrapper {
+    width: 532px;
+    max-width: 90%;
+  }
+  .smart_label {
+    display: none;
+  }
+  .bg-image {
+    background-position: -1000px 0;
+  }
+}
