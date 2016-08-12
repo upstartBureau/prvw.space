@@ -52,10 +52,10 @@ if (function_exists('add_theme_support'))
     ));*/
 
     // Enables post and comment RSS feed links to head
-    add_theme_support('automatic-feed-links');
+    // add_theme_support('automatic-feed-links');
 
     // Localisation Support
-    load_theme_textdomain('html5blank', get_template_directory() . '/languages');
+    // load_theme_textdomain('html5blank', get_template_directory() . '/languages');
 }
 
 /*------------------------------------*\
@@ -87,72 +87,20 @@ function html5blank_nav()
     );
 }
 
-// Load HTML5 Blank scripts (header.php)
-function html5blank_header_scripts()
+// Load scripts (header.php)
+function header_scripts()
 {
-    if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
-        if (HTML5_DEBUG) {
-            // jQuery
-            wp_deregister_script('jquery');
-            wp_register_script('jquery', get_template_directory_uri() . '/bower_components/jquery/dist/jquery.js', array(), '1.11.1');
-
-            // Conditionizr
-            wp_register_script('conditionizr', get_template_directory_uri() . '/js/lib/conditionizr-4.3.0.min.js', array(), '4.3.0');
-
-            // Modernizr
-            wp_register_script('modernizr', get_template_directory_uri() . '/bower_components/modernizr/modernizr.js', array(), '2.8.3');
-
-            // Custom scripts
-            wp_register_script(
-                'html5blankscripts',
-                get_template_directory_uri() . '/js/scripts.js',
-                array(
-                    'conditionizr',
-                    'modernizr',
-                    'jquery'),
-                '1.0.0');
-
-            // Enqueue Scripts
-            wp_enqueue_script('html5blankscripts');
-
-        // If production
-        } else {
-            // Scripts minify
-            wp_register_script('html5blankscripts-min', get_template_directory_uri() . '/js/scripts.min.js', array(), '1.0.0');
-            // Enqueue Scripts
-            wp_enqueue_script('html5blankscripts-min');
-        }
-    }
+    wp_register_script( 'customscripts', get_template_directory_uri() . '/js/scripts.js', array(), '1.0.1');
+    wp_enqueue_script('customscripts');
 }
 
-// Load HTML5 Blank conditional scripts
-function html5blank_conditional_scripts()
+// Load styles
+function styles()
 {
-    if (is_page('pagenamehere')) {
-        // Conditional script(s)
-        wp_register_script('scriptname', get_template_directory_uri() . '/js/scriptname.js', array('jquery'), '1.0.0');
-        wp_enqueue_script('scriptname');
-    }
-}
-
-// Load HTML5 Blank styles
-function html5blank_styles()
-{
-    if (HTML5_DEBUG) {
-        // normalize-css
-        wp_register_style('normalize', get_template_directory_uri() . '/bower_components/normalize.css/normalize.css', array(), '3.0.1');
-
-        // Custom CSS
-        wp_register_style('html5blank', get_template_directory_uri() . '/style.css', array('normalize'), '1.0');
-
-        // Register CSS
-        wp_enqueue_style('html5blank');
-    } else {
-        // Custom CSS
-        wp_register_style('html5blankcssmin', get_template_directory_uri() . '/style.css', array(), '1.0');
-        // Register CSS
-        wp_enqueue_style('html5blankcssmin');
-    }
+    // Custom CSS
+    wp_register_style('css', get_template_directory_uri() . '/style.css', array(), '1.0');
+    // Register CSS
+    wp_enqueue_style('css');
 }
 
 // Register HTML5 Blank Navigation
@@ -301,24 +249,9 @@ function remove_admin_bar()
 }
 
 // Remove 'text/css' from our enqueued stylesheet
-function html5_style_remove($tag)
+function style_attr_remove($tag)
 {
     return preg_replace('~\s+type=["\'][^"\']++["\']~', '', $tag);
-}
-
-// Remove thumbnail width and height dimensions that prevent fluid images in the_thumbnail
-function remove_thumbnail_dimensions( $html )
-{
-    $html = preg_replace('/(width|height)=\"\d*\"\s/', "", $html);
-    return $html;
-}
-
-// Custom Gravatar in Settings > Discussion
-function html5blankgravatar ($avatar_defaults)
-{
-    $myavatar = get_template_directory_uri() . '/img/gravatar.jpg';
-    $avatar_defaults[$myavatar] = "Custom Gravatar";
-    return $avatar_defaults;
 }
 
 // Threaded Comments
@@ -331,59 +264,15 @@ function enable_threaded_comments()
     }
 }
 
-// Custom Comments Callback
-function html5blankcomments($comment, $args, $depth)
-{
-    $GLOBALS['comment'] = $comment;
-    extract($args, EXTR_SKIP);
-
-    if ( 'div' == $args['style'] ) {
-        $tag = 'div';
-        $add_below = 'comment';
-    } else {
-        $tag = 'li';
-        $add_below = 'div-comment';
-    }
-?>
-    <!-- heads up: starting < for the html tag (li or div) in the next line: -->
-    <<?php echo $tag ?> <?php comment_class(empty( $args['has_children'] ) ? '' : 'parent') ?> id="comment-<?php comment_ID() ?>">
-    <?php if ( 'div' != $args['style'] ) : ?>
-    <div id="div-comment-<?php comment_ID() ?>" class="comment-body">
-    <?php endif; ?>
-    <div class="comment-author vcard">
-    <?php if ($args['avatar_size'] != 0) echo get_avatar( $comment, $args['avatar_size'] ); ?>
-    <?php printf(__('<cite class="fn">%s</cite> <span class="says">says:</span>'), get_comment_author_link()) ?>
-    </div>
-<?php if ($comment->comment_approved == '0') : ?>
-    <em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.') ?></em>
-    <br />
-<?php endif; ?>
-
-    <div class="comment-meta commentmetadata"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>">
-        <?php
-            printf( __('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','' );
-        ?>
-    </div>
-
-    <?php comment_text() ?>
-
-    <div class="reply">
-    <?php comment_reply_link(array_merge( $args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
-    </div>
-    <?php if ( 'div' != $args['style'] ) : ?>
-    </div>
-    <?php endif; ?>
-<?php }
-
 /*------------------------------------*\
     Actions + Filters + ShortCodes
 \*------------------------------------*/
 
 // Add Actions
-add_action('init', 'html5blank_header_scripts'); // Add Custom Scripts to wp_head
-add_action('wp_print_scripts', 'html5blank_conditional_scripts'); // Add Conditional Page Scripts
+add_action('init', 'header_scripts'); // Add Custom Scripts to wp_head
+// add_action('wp_print_scripts', 'html5blank_conditional_scripts'); // Add Conditional Page Scripts
 add_action('get_header', 'enable_threaded_comments'); // Enable Threaded Comments
-add_action('wp_enqueue_scripts', 'html5blank_styles'); // Add Theme Stylesheet
+add_action('wp_enqueue_scripts', 'styles'); // Add Theme Stylesheet
 add_action('init', 'register_html5_menu'); // Add HTML5 Blank Menu
 add_action('init', 'create_post_type_html5'); // Add our HTML5 Blank Custom Post Type
 add_action('widgets_init', 'my_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
@@ -412,7 +301,7 @@ add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in Excer
 add_filter('the_excerpt', 'do_shortcode'); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)
 add_filter('excerpt_more', 'html5_blank_view_article'); // Add 'View Article' button instead of [...] for Excerpts
 add_filter('show_admin_bar', 'remove_admin_bar'); // Remove Admin bar
-add_filter('style_loader_tag', 'html5_style_remove'); // Remove 'text/css' from enqueued stylesheet
+add_filter('style_loader_tag', 'style_attr_remove'); // Remove 'text/css' from enqueued stylesheet
 add_filter('post_thumbnail_html', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to thumbnails
 add_filter('post_thumbnail_html', 'remove_width_attribute', 10 ); // Remove width and height dynamic attributes to post images
 add_filter('image_send_to_editor', 'remove_width_attribute', 10 ); // Remove width and height dynamic attributes to post images
