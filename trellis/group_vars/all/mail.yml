@@ -1,0 +1,7 @@
+# Documentation: https://roots.io/trellis/docs/mail/
+mail_smtp_server: smtp.prvw.space:587
+mail_admin: admin@prvw.space
+mail_hostname: prvw.space
+mail_user: smtp_user
+mail_password: "{{ vault_mail_password }}" # Define this variable in group_vars/all/vault.yml
+# NOTE: Changes made here
