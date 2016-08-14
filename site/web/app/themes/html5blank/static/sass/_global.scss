@@ -114,6 +114,9 @@ section.content {
   width: 100%;
   padding-top: 2.4rem;
 }
+section.content.brands {
+  padding-top: 12em;
+}
 section.content.logo-carousel {
   padding-bottom: 19em;
   @media only screen and (max-width: 768px) {
@@ -129,8 +132,6 @@ section.content.logo-carousel {
   letter-spacing: 0.8px;
 }
 .row {
-  // width: 1440px;
-  // max-width: 100%;
   width: 100%;
   margin: auto;
   padding: 0 17.5vw;
@@ -145,15 +146,16 @@ section.content.logo-carousel {
 }
 .brands {
   min-height: 473px;
-  background-image: url('../img/brands/header-bg.png');
+  background-image: url('./img/brands/header-bg.png');
+  background-repeat: no-repeat;
 }
 .future-proof {
   min-height: 486px;
-  background-image: url('../img/brands/section-bg-2.png');
+  background-image: url('./img/brands/section-bg-2.png');
 }
 .retailers{
   min-height: 473px;
-  background-image: url('../img/retailers/header-bg.png');
+  background-image: url('./img/retailers/header-bg.png');
 }
 section.content.on-demand {
   // width: 1440px;
@@ -282,7 +284,7 @@ h1.logo-cloud-headline {
 .cloud-illustration {
   margin: 1em auto;
   display: block;
-  background: url(../img/retailers/data-cloud.png) no-repeat;
+  background: url('./img/retailers/data-cloud.png') no-repeat;
   background-size: contain;
   width: 768px;
   height: 650px;

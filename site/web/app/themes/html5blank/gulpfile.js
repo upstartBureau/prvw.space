@@ -7,7 +7,7 @@ const sass = require('gulp-sass')
 
 gulp.task('serve', ['sass'], function() {
   browserSync.init({
-    server: './static'
+    server: 'static'
   })
   gulp.watch('./static/**', ['js'])
   gulp.watch('./static/sass/*.scss', ['sass'])

@@ -88,10 +88,9 @@ function html5blank_nav()
 }
 
 // Load scripts (header.php)
-function header_scripts()
-{
-    wp_register_script( 'customscripts', get_template_directory_uri() . '/js/main.js', array(), '1.0.1');
-    wp_enqueue_script('customscripts');
+function header_scripts() {
+    wp_register_script( 'headerScripts', get_template_directory_uri() . '/js/main.js', array(), '1.0.1');
+    wp_enqueue_script('headerScripts');
 }
 
 // Load styles
